@@ -1,3 +1,5 @@
+import React, { useState, PureComponent } from 'react'
+
 import { ColorModeContext, useMode } from "./theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import {Routes, Route} from 'react-router-dom'
@@ -8,14 +10,17 @@ import Resources from './resources'
 
 function App() {
   const [theme, colorMode] = useMode();
+  const [isSidebar, setIsSidebar] = useState(true);
     
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
+          <SideBar isSidebar={isSidebar} />
           <main className="content">
-            <Topbar />
+            <Topbar setIsSidebar={setIsSidebar}/>
+            
           <Routes>
             <Route path="/" element={<Resources.Dashboard />}/>
             {/* <Route path="/team" element={<Resources.Team />}/> */}
